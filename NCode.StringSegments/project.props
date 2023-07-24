@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <PropertyGroup>
+    <Description>Provides the ability to split a string into substrings based on a delimiter without any additional heap allocations.</Description>
+    <PackageTags>string split segment substring</PackageTags>
+  </PropertyGroup>
+
+</Project>
