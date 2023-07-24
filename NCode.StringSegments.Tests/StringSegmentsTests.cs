@@ -1,4 +1,5 @@
 ﻿#region Copyright Preamble
+
 //
 //    Copyright @ 2023 NCode Group
 //
@@ -13,6 +14,7 @@
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
+
 #endregion
 
 namespace NCode.Buffers.Tests;
@@ -36,7 +38,7 @@ public class StringSegmentsTests
         var original = "original".AsMemory();
         var first = new MemorySegment<char>(original);
         var segments = new StringSegments(original, count, first);
-        Assert.Equal(count, segments.Count);
+        Assert.Equal(new[] { first }, segments);
     }
 
     [Fact]
@@ -84,6 +86,13 @@ public class StringSegmentsTests
                 Assert.Null(segments[index].Next);
             }
         }
+    }
+
+    [Fact]
+    public void GetEnumerator_Valid()
+    {
+        var segments = StringSegments.Split("1.2.3.4", '.');
+        Assert.Equal(segments.Select(segment => segment.Memory.ToString()), new[] { "1", "2", "3", "4" });
     }
 
     [Fact]

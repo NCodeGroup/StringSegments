@@ -110,7 +110,7 @@ public static class StringExtensions
 /// Provides the ability to split a string into substrings based on a delimiter
 /// without any additional heap allocations.
 /// </summary>
-public class StringSegments
+public class StringSegments : IReadOnlyList<ReadOnlySequenceSegment<char>>
 {
     /// <summary>
     /// Gets the original string value.
@@ -132,9 +132,15 @@ public class StringSegments
     /// </summary>
     /// <param name="index">The zero-based index of the substring to get.</param>
     public ReadOnlySequenceSegment<char> this[int index] { get; }
+
+    /// <summary>
+    /// Returns an enumerator that iterates over the collection of substrings. 
+    /// </summary> 
+    public IEnumerator<ReadOnlySequenceSegment<char>> GetEnumerator();
 }
 ```
 
 ## Release Notes
 
 * v1.0.0 - Initial release
+* v1.0.1 - Added IReadOnlyList<> to StringSegments

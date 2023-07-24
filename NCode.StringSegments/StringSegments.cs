@@ -1,4 +1,5 @@
 #region Copyright Preamble
+
 //
 //    Copyright @ 2023 NCode Group
 //
@@ -13,18 +14,24 @@
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
+
 #endregion
 
 using System.Buffers;
-using System.Diagnostics;
+using System.Collections;
 
 namespace NCode.Buffers;
 
 /// <summary>
 /// Provides the ability to split a string into substrings based on a delimiter without any additional heap allocations.
 /// </summary>
-public class StringSegments
+public class StringSegments : IReadOnlyList<ReadOnlySequenceSegment<char>>
 {
+    /// <summary>
+    /// Used to optimize multiple invocations to the indexer.
+    /// </summary>
+    private IReadOnlyList<ReadOnlySequenceSegment<char>>? InnerListOrNull { get; set; }
+
     /// <summary>
     /// Gets the original string value.
     /// </summary>
@@ -41,29 +48,6 @@ public class StringSegments
     public ReadOnlySequenceSegment<char> First { get; }
 
     /// <summary>
-    /// Gets the substring at the specified index.
-    /// </summary>
-    /// <param name="index">The zero-based index of the substring to get.</param>
-    public ReadOnlySequenceSegment<char> this[int index]
-    {
-        get
-        {
-            if (index < 0 || index >= Count)
-                throw new IndexOutOfRangeException();
-
-            var iter = First;
-            while (index > 0 && iter != null)
-            {
-                iter = iter.Next;
-                --index;
-            }
-
-            Debug.Assert(iter != null);
-            return iter;
-        }
-    }
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="StringSegments"/> class.
     /// </summary>
     /// <param name="original">The original string value.</param>
@@ -74,6 +58,33 @@ public class StringSegments
         Original = original;
         Count = count;
         First = first;
+    }
+
+    /// <summary>
+    /// Gets the substring at the specified index.
+    /// </summary>
+    /// <param name="index">The zero-based index of the substring to get.</param>
+    public ReadOnlySequenceSegment<char> this[int index]
+    {
+        get
+        {
+            InnerListOrNull ??= this.ToList();
+            return InnerListOrNull[index];
+        }
+    }
+
+    /// <inheritdoc/>
+    public IEnumerator<ReadOnlySequenceSegment<char>> GetEnumerator()
+    {
+        for (var iter = First; iter != null; iter = iter.Next)
+        {
+            yield return iter;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 
     /// <summary>
