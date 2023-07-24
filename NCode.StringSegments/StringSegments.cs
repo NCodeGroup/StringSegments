@@ -25,13 +25,8 @@ namespace NCode.Buffers;
 /// <summary>
 /// Provides the ability to split a string into substrings based on a delimiter without any additional heap allocations.
 /// </summary>
-public class StringSegments : IReadOnlyList<ReadOnlySequenceSegment<char>>
+public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 {
-    /// <summary>
-    /// Used to optimize multiple invocations to the indexer.
-    /// </summary>
-    private IReadOnlyList<ReadOnlySequenceSegment<char>>? InnerListOrNull { get; set; }
-
     /// <summary>
     /// Gets the original string value.
     /// </summary>
@@ -58,19 +53,6 @@ public class StringSegments : IReadOnlyList<ReadOnlySequenceSegment<char>>
         Original = original;
         Count = count;
         First = first;
-    }
-
-    /// <summary>
-    /// Gets the substring at the specified index.
-    /// </summary>
-    /// <param name="index">The zero-based index of the substring to get.</param>
-    public ReadOnlySequenceSegment<char> this[int index]
-    {
-        get
-        {
-            InnerListOrNull ??= this.ToList();
-            return InnerListOrNull[index];
-        }
     }
 
     /// <inheritdoc/>

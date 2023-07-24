@@ -51,43 +51,6 @@ public class StringSegmentsTests
         Assert.Same(first, segments.First);
     }
 
-    [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    [InlineData(5)]
-    [InlineData(8)]
-    [InlineData(13)]
-    [InlineData(21)]
-    public void Indexer_Valid(int count)
-    {
-        var index = 0;
-        var first = new MemorySegment<char>(index.ToString().AsMemory());
-        var last = first;
-        while (++index < count)
-        {
-            last = last.Append(index.ToString().AsMemory());
-        }
-
-        var segments = new StringSegments("don't care".AsMemory(), count, first);
-
-        Assert.Equal(count, segments.Count);
-        for (index = 0; index < count; ++index)
-        {
-            Assert.Equal(index.ToString(), segments[index].Memory.ToString());
-            if (index < count - 1)
-            {
-                var next = segments[index].Next;
-                Assert.NotNull(next);
-                Assert.Equal((index + 1).ToString(), next!.Memory.ToString());
-            }
-            else
-            {
-                Assert.Null(segments[index].Next);
-            }
-        }
-    }
-
     [Fact]
     public void GetEnumerator_Valid()
     {
@@ -101,10 +64,12 @@ public class StringSegmentsTests
         var segments = StringSegments.Split("1.2.3.4", '.');
         Assert.Equal("1.2.3.4", segments.Original.ToString());
         Assert.Equal(4, segments.Count);
-        Assert.Equal("1", segments[0].Memory.ToString());
-        Assert.Equal("2", segments[1].Memory.ToString());
-        Assert.Equal("3", segments[2].Memory.ToString());
-        Assert.Equal("4", segments[3].Memory.ToString());
+
+        var list = segments.ToList();
+        Assert.Equal("1", list[0].Memory.ToString());
+        Assert.Equal("2", list[1].Memory.ToString());
+        Assert.Equal("3", list[2].Memory.ToString());
+        Assert.Equal("4", list[3].Memory.ToString());
     }
 
     [Fact]
@@ -113,11 +78,13 @@ public class StringSegmentsTests
         var segments = StringSegments.Split("1ab2Ab3aB4ab5", "ab", StringComparison.OrdinalIgnoreCase);
         Assert.Equal("1ab2Ab3aB4ab5", segments.Original.ToString());
         Assert.Equal(5, segments.Count);
-        Assert.Equal("1", segments[0].Memory.ToString());
-        Assert.Equal("2", segments[1].Memory.ToString());
-        Assert.Equal("3", segments[2].Memory.ToString());
-        Assert.Equal("4", segments[3].Memory.ToString());
-        Assert.Equal("5", segments[4].Memory.ToString());
+
+        var list = segments.ToList();
+        Assert.Equal("1", list[0].Memory.ToString());
+        Assert.Equal("2", list[1].Memory.ToString());
+        Assert.Equal("3", list[2].Memory.ToString());
+        Assert.Equal("4", list[3].Memory.ToString());
+        Assert.Equal("5", list[4].Memory.ToString());
     }
 
     [Fact]
@@ -126,8 +93,10 @@ public class StringSegmentsTests
         var segments = StringSegments.Split("1ab2Ab3aB4ab5", "ab", StringComparison.Ordinal);
         Assert.Equal("1ab2Ab3aB4ab5", segments.Original.ToString());
         Assert.Equal(3, segments.Count);
-        Assert.Equal("1", segments[0].Memory.ToString());
-        Assert.Equal("2Ab3aB4", segments[1].Memory.ToString());
-        Assert.Equal("5", segments[2].Memory.ToString());
+
+        var list = segments.ToList();
+        Assert.Equal("1", list[0].Memory.ToString());
+        Assert.Equal("2Ab3aB4", list[1].Memory.ToString());
+        Assert.Equal("5", list[2].Memory.ToString());
     }
 }
