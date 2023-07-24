@@ -20,11 +20,10 @@ public static class StringExtensions
     /// additional heap allocations.
     /// </summary>
     /// <param name="value">The string to split into substrings.</param>
-    /// <param name="separator">A character that delimits the substrings in
-    /// the original string.</param>
+    /// <param name="separator">A character that delimits the substrings in the
+    /// original string.</param>
     /// <returns>A <see cref="StringSegments"/> instance that contains the
-    /// substrings from the string that are delimited by the separator.
-    /// </returns>
+    /// substrings from the string that are delimited by the separator.</returns>
     public static StringSegments SplitSegments(
         this string value,
         char separator);
@@ -37,8 +36,7 @@ public static class StringExtensions
     /// <param name="separator">The string that delimits the substrings in the
     /// original string.</param>
     /// <returns>A <see cref="StringSegments"/> instance that contains the
-    /// substrings from the string that are delimited
-    /// by the separator.</returns>
+    /// substrings from the string that are delimited by the separator.</returns>
     public static StringSegments SplitSegments(
         this string value,
         ReadOnlySpan<char> separator);
@@ -50,11 +48,10 @@ public static class StringExtensions
     /// <param name="value">The string to split into substrings.</param>
     /// <param name="separator">The string that delimits the substrings in the
     /// original string.</param>
-    /// <param name="comparisonType">An enumeration that specifies the rules
-    /// for the substring search.</param>
+    /// <param name="comparisonType">An enumeration that specifies the rules for
+    /// the substring search.</param>
     /// <returns>A <see cref="StringSegments"/> instance that contains the
-    /// substrings from the string that are delimited
-    /// by the separator.</returns>
+    /// substrings from the string that are delimited by the separator.</returns>
     public static StringSegments SplitSegments(
         this string value,
         ReadOnlySpan<char> separator,
@@ -65,11 +62,10 @@ public static class StringExtensions
     /// additional heap allocations.
     /// </summary>
     /// <param name="value">The string to split into substrings.</param>
-    /// <param name="separator">A character that delimits the substrings in
-    /// the original string.</param>
+    /// <param name="separator">A character that delimits the substrings in the
+    /// original string.</param>
     /// <returns>A <see cref="StringSegments"/> instance that contains the
-    /// substrings from the string that are delimited by the separator.
-    /// </returns>
+    /// substrings from the string that are delimited by the separator.</returns>
     public static StringSegments SplitSegments(
         this ReadOnlyMemory<char> value,
         char separator);
@@ -82,8 +78,7 @@ public static class StringExtensions
     /// <param name="separator">The string that delimits the substrings in the
     /// original string.</param>
     /// <returns>A <see cref="StringSegments"/> instance that contains the
-    /// substrings from the string that are delimited
-    /// by the separator.</returns>
+    /// substrings from the string that are delimited by the separator.</returns>
     public static StringSegments SplitSegments(
         this ReadOnlyMemory<char> value,
         ReadOnlySpan<char> separator);
@@ -95,11 +90,10 @@ public static class StringExtensions
     /// <param name="value">The string to split into substrings.</param>
     /// <param name="separator">The string that delimits the substrings in the
     /// original string.</param>
-    /// <param name="comparisonType">An enumeration that specifies the rules
-    /// for the substring search.</param>
+    /// <param name="comparisonType">An enumeration that specifies the rules for
+    /// the substring search.</param>
     /// <returns>A <see cref="StringSegments"/> instance that contains the
-    /// substrings from the string that are delimited by the separator.
-    /// </returns>
+    /// substrings from the string that are delimited by the separator.</returns>
     public static StringSegments SplitSegments(
         this ReadOnlyMemory<char> value,
         ReadOnlySpan<char> separator,
