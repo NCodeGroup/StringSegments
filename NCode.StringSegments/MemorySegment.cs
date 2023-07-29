@@ -1,13 +1,13 @@
 #region Copyright Preamble
-// 
+//
 //    Copyright @ 2023 NCode Group
-// 
+//
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-// 
+//
 //        http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,7 +22,7 @@ namespace NCode.Buffers;
 /// <summary>
 /// Provides an implementation of <see cref="ReadOnlySequenceSegment{T}"/> using a linked list of <see cref="ReadOnlyMemory{T}"/> nodes.
 /// </summary>
-internal class MemorySegment<T> : ReadOnlySequenceSegment<T>
+public class MemorySegment<T> : ReadOnlySequenceSegment<T>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MemorySegment{T}"/> class.

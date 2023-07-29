@@ -134,3 +134,4 @@ public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 * v1.0.1 - Added IReadOnlyList<> to StringSegments
 * v2.0.0 - Revert IReadOnlyList<> to IReadOnlyCollection<>
 * v2.0.1 - Updated readme
+* v2.0.2 - Exposing MemorySegment as public
