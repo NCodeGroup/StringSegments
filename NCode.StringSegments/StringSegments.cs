@@ -19,14 +19,25 @@
 
 using System.Buffers;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 namespace NCode.Buffers;
 
 /// <summary>
 /// Provides the ability to split a string into substrings based on a delimiter without any additional heap allocations.
 /// </summary>
+[PublicAPI]
 public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 {
+    private ReadOnlySequenceSegment<char>? FirstOrDefault { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the <see cref="StringSegments"/> instance is empty.
+    /// </summary>
+    [MemberNotNullWhen(false, nameof(FirstOrDefault))]
+    public bool IsEmpty => FirstOrDefault is null;
+
     /// <summary>
     /// Gets the original string value.
     /// </summary>
@@ -40,10 +51,12 @@ public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegm
     /// <summary>
     /// Gets the first substring.
     /// </summary>
-    public ReadOnlySequenceSegment<char> First { get; }
+    public ReadOnlySequenceSegment<char> First =>
+        FirstOrDefault ??
+        throw new InvalidOperationException("No segments found.");
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="StringSegments"/> class.
+    /// Initializes a new instance of the <see cref="StringSegments"/> struct.
     /// </summary>
     /// <param name="original">The original string value.</param>
     /// <param name="count">The number of segments.</param>
@@ -52,13 +65,18 @@ public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegm
     {
         Original = original;
         Count = count;
-        First = first;
+        FirstOrDefault = first;
     }
 
     /// <inheritdoc/>
     public IEnumerator<ReadOnlySequenceSegment<char>> GetEnumerator()
     {
-        for (var iter = First; iter != null; iter = iter.Next)
+        if (IsEmpty)
+        {
+            yield break;
+        }
+
+        for (var iter = FirstOrDefault; iter != null; iter = iter.Next)
         {
             yield return iter;
         }
