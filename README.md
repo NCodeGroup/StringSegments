@@ -1,4 +1,5 @@
 [![ci](https://github.com/NCodeGroup/StringSegments/actions/workflows/main.yml/badge.svg)](https://github.com/NCodeGroup/StringSegments/actions)
+[![Nuget](https://img.shields.io/nuget/v/NCode.StringSegments.svg)](https://www.nuget.org/packages/NCode.StringSegments/)
 
 # NCode.StringSegments
 
