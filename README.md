@@ -108,6 +108,11 @@ public static class StringExtensions
 public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 {
     /// <summary>
+    /// Gets a value indicating whether the current instance is empty.
+    /// </summary>
+    public bool IsEmpty { get; }
+
+    /// <summary>
     /// Gets the original string value.
     /// </summary>
     public ReadOnlyMemory<char> Original { get; }
@@ -120,6 +125,7 @@ public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegm
     /// <summary>
     /// Gets the first substring.
     /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the current instance is empty.</exception>
     public ReadOnlySequenceSegment<char> First { get; }
 
     /// <summary>

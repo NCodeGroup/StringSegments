@@ -33,7 +33,7 @@ public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegm
     private ReadOnlySequenceSegment<char>? FirstOrDefault { get; }
 
     /// <summary>
-    /// Gets a value indicating whether the <see cref="StringSegments"/> instance is empty.
+    /// Gets a value indicating whether the current instance is empty.
     /// </summary>
     [MemberNotNullWhen(false, nameof(FirstOrDefault))]
     public bool IsEmpty => FirstOrDefault is null;
