@@ -51,6 +51,7 @@ public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegm
     /// <summary>
     /// Gets the first substring.
     /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the current instance is empty.</exception>
     public ReadOnlySequenceSegment<char> First =>
         FirstOrDefault ??
         throw new InvalidOperationException("No segments found.");
