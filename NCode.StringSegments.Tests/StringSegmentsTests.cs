@@ -22,6 +22,23 @@ namespace NCode.Buffers.Tests;
 public class StringSegmentsTests
 {
     [Fact]
+    public void IsEmpty_GivenNothing_Valid()
+    {
+        var segments = new StringSegments();
+        Assert.True(segments.IsEmpty);
+    }
+
+    [Fact]
+    public void IsEmpty_GivenSomething_Valid()
+    {
+        const int count = 1;
+        var original = "original".AsMemory();
+        var first = new MemorySegment<char>(original);
+        var segments = new StringSegments(original, count, first);
+        Assert.False(segments.IsEmpty);
+    }
+
+    [Fact]
     public void Original_Valid()
     {
         const int count = 1;
@@ -52,10 +69,25 @@ public class StringSegmentsTests
     }
 
     [Fact]
+    public void First_Throws()
+    {
+        var segments = new StringSegments();
+        var exception = Assert.Throws<InvalidOperationException>(() => segments.First);
+        Assert.Equal("No segments found.", exception.Message);
+    }
+
+    [Fact]
     public void GetEnumerator_Valid()
     {
         var segments = StringSegments.Split("1.2.3.4", '.');
         Assert.Equal(segments.Select(segment => segment.Memory.ToString()), new[] { "1", "2", "3", "4" });
+    }
+
+    [Fact]
+    public void GetEnumerator_GivenEmpty_Valid()
+    {
+        var segments = new StringSegments();
+        Assert.Empty(segments);
     }
 
     [Fact]

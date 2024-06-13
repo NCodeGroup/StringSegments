@@ -16,12 +16,14 @@
 #endregion
 
 using System.Buffers;
+using JetBrains.Annotations;
 
 namespace NCode.Buffers;
 
 /// <summary>
 /// Provides an implementation of <see cref="ReadOnlySequenceSegment{T}"/> using a linked list of <see cref="ReadOnlyMemory{T}"/> nodes.
 /// </summary>
+[PublicAPI]
 public class MemorySegment<T> : ReadOnlySequenceSegment<T>
 {
     /// <summary>

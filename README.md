@@ -1,4 +1,5 @@
 [![ci](https://github.com/NCodeGroup/StringSegments/actions/workflows/main.yml/badge.svg)](https://github.com/NCodeGroup/StringSegments/actions)
+[![Nuget](https://img.shields.io/nuget/v/NCode.StringSegments.svg)](https://www.nuget.org/packages/NCode.StringSegments/)
 
 # NCode.StringSegments
 
@@ -104,8 +105,13 @@ public static class StringExtensions
 /// Provides the ability to split a string into substrings based on a delimiter
 /// without any additional heap allocations.
 /// </summary>
-public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
+public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 {
+    /// <summary>
+    /// Gets a value indicating whether the current instance is empty.
+    /// </summary>
+    public bool IsEmpty { get; }
+
     /// <summary>
     /// Gets the original string value.
     /// </summary>
@@ -119,6 +125,7 @@ public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
     /// <summary>
     /// Gets the first substring.
     /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the current instance is empty.</exception>
     public ReadOnlySequenceSegment<char> First { get; }
 
     /// <summary>
@@ -135,3 +142,4 @@ public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 * v2.0.0 - Revert IReadOnlyList<> to IReadOnlyCollection<>
 * v2.0.1 - Updated readme
 * v2.0.2 - Exposing MemorySegment as public
+* v3.0.0 - Change StringSegments to be a struct and net8 upgrade
