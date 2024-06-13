@@ -25,7 +25,7 @@ namespace NCode.Buffers;
 /// <summary>
 /// Provides the ability to split a string into substrings based on a delimiter without any additional heap allocations.
 /// </summary>
-public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
+public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 {
     /// <summary>
     /// Gets the original string value.

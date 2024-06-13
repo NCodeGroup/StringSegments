@@ -104,7 +104,7 @@ public static class StringExtensions
 /// Provides the ability to split a string into substrings based on a delimiter
 /// without any additional heap allocations.
 /// </summary>
-public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
+public readonly struct StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 {
     /// <summary>
     /// Gets the original string value.
@@ -135,3 +135,4 @@ public class StringSegments : IReadOnlyCollection<ReadOnlySequenceSegment<char>>
 * v2.0.0 - Revert IReadOnlyList<> to IReadOnlyCollection<>
 * v2.0.1 - Updated readme
 * v2.0.2 - Exposing MemorySegment as public
+* v3.0.0 - Change StringSegments to be a struct and net8 upgrade
