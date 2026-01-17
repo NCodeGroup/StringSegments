@@ -3,6 +3,10 @@
 
 # NCode.StringSegments
 
+> ⚠️ **DEPRECATED**: This package is deprecated and no longer maintained. Please use [NCode.Buffers](https://github.com/NCodeGroup/Buffers) instead, which combines functionality from multiple projects into one package with additional features.
+>
+> [![Nuget](https://img.shields.io/nuget/v/NCode.Buffers.svg)](https://www.nuget.org/packages/NCode.Buffers/)
+
 Provides the ability to split a string into substrings based on a delimiter without any additional heap allocations.
 
 ## API
